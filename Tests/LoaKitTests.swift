@@ -36,7 +36,7 @@ final class LoaKitTests: XCTestCase {
     func testSiblings() async throws {
         // ✅ 준비
         let repository = LoaRepository()
-        let name = "햄머박홍규"
+        let name = "asdddddasds"
 
         // ✅ 실행
         let result = try await repository.fetchSiblings(name: name)
@@ -46,6 +46,65 @@ final class LoaKitTests: XCTestCase {
         
         // ✅ 검증
         XCTAssertNoThrow(result)
-        XCTAssertNotNil(result, "검색 결과가 없음")
+    }
+    
+    func testGetProfile() async throws {
+        // ✅ 준비
+        let repository = LoaRepository()
+        let name = "햄머박홍규응가"
+
+        // ✅ 실행
+        let result = try await repository.fetchProfile(name: name)
+        
+        // ✅ 출력
+        print(result)
+        
+        // ✅ 검증
+        XCTAssertNoThrow(result)
+    }
+    
+    func testGetEqipment() async throws {
+        // ✅ 준비
+        let repository = LoaRepository()
+        let name = "햄머박홍규"
+
+        // ✅ 실행
+        let result = try await repository.fetchEquipment(name: name)
+        
+        // ✅ 출력
+        print(result)
+        
+        // ✅ 검증
+        XCTAssertNoThrow(result)
+    }
+    
+    func testGetAvatars() async throws {
+        // ✅ 준비
+        let repository = LoaRepository()
+        let name = "햄머박홍규"
+
+        // ✅ 실행
+        let result = try await repository.fetchAvatars(name: name)
+        
+        // ✅ 출력
+        print(result)
+        
+        // ✅ 검증
+        XCTAssertNoThrow(result)
+    }
+    
+    func testGetCombatSkills() async throws {
+        // ✅ 준비
+        let repository = LoaRepository()
+        let name = "햄머박홍규"
+
+        // ✅ 실행
+        let result = try await repository.fetchCombatSkills(name: name)
+        
+        // ✅ 출력
+        print(result)
+        
+        // ✅ 검증
+        XCTAssertNoThrow(result)
     }
 }

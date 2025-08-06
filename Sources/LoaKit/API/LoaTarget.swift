@@ -10,6 +10,10 @@ import Moya
 
 public enum LoaTarget {
     case siblings(name: String)
+    case profiles(name: String)
+    case equipment(name: String)
+    case avatars(name: String)
+    case combatSkills(name: String)
 }
 
 public enum LoaToken {
@@ -33,19 +37,27 @@ extension LoaTarget: TargetType {
         switch self {
         case .siblings(let name):
             "/characters/\(name)/siblings"
+        case .profiles(let name):
+            "/armories/characters/\(name)/profiles"
+        case .equipment(let name):
+            "/armories/characters/\(name)/equipment"
+        case .avatars(let name):
+            "/armories/characters/\(name)/avatars"
+        case .combatSkills(let name):
+            "/armories/characters/\(name)/combat-skills"
         }
     }
     
     public var method: Moya.Method {
         switch self {
-        case .siblings:
+        default:
             return .get
         }
     }
     
     public var task: Task {
         switch self {
-        case .siblings:
+        default:
             return .requestPlain
         }
     }
