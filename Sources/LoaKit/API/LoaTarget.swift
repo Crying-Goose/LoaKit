@@ -14,6 +14,9 @@ public enum LoaTarget {
     case equipment(name: String)
     case avatars(name: String)
     case combatSkills(name: String)
+    case notices
+    case evnets
+    case calendar
 }
 
 public enum LoaToken {
@@ -45,6 +48,12 @@ extension LoaTarget: TargetType {
             "/armories/characters/\(name)/avatars"
         case .combatSkills(let name):
             "/armories/characters/\(name)/combat-skills"
+        case .notices:
+            "/news/notices"
+        case .evnets:
+            "/news/events"
+        case .calendar:
+            "/gamecontents/calendar"
         }
     }
     

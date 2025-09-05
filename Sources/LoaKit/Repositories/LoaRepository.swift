@@ -13,6 +13,8 @@ public protocol LoaRepositoryProtocol {
     func fetchEquipment(name: String) async throws -> [Equipment]
     func fetchAvatars(name: String) async throws -> [Avatar]
     func fetchCombatSkills(name: String) async throws -> [CombatSkill]
+    func fetchNotices() async throws -> [Notice]
+    func fetchEvnets() async throws -> [Event]
 }
 
 public final class LoaRepository: LoaRepositoryProtocol {
@@ -35,18 +37,33 @@ public final class LoaRepository: LoaRepositoryProtocol {
         return .init(dto: response)
     }
     
+    // 캐릭터 장비 조회
     public func fetchEquipment(name: String) async throws -> [Equipment] {
         let response = try await apiService.getEqupment(name: name)
         return response.map { .init(dto: $0) }
     }
     
+    // 캐릭터 아바타 조회
     public func fetchAvatars(name: String) async throws -> [Avatar] {
         let response = try await apiService.getAvatars(name: name)
         return response.map { .init(dto: $0) }
     }
     
+    // 캐릭터 스킬 조회
     public func fetchCombatSkills(name: String) async throws -> [CombatSkill] {
         let response = try await apiService.getCombatSkills(name: name)
+        return response.map { .init(dto: $0) }
+    }
+    
+    // 공지사항 조회
+    public func fetchNotices() async throws -> [Notice] {
+        let response = try await apiService.getNotices()
+        return response.map { .init(dto: $0) }
+    }
+    
+    // 이벤트 조회
+    public func fetchEvnets() async throws -> [Event] {
+        let response = try await apiService.getEvents()
         return response.map { .init(dto: $0) }
     }
 }

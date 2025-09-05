@@ -14,6 +14,8 @@ public protocol LoaAPIServiceProtocol {
     func getEqupment(name: String) async throws -> [EquipmentDTO]
     func getAvatars(name: String) async throws -> [AvatarDTO]
     func getCombatSkills(name: String) async throws -> [CombatSkillDTO]
+    func getNotices() async throws -> [NoticeDTO]
+    func getEvents() async throws -> [EventDTO]
 }
 
 struct CustomURLLoggerPlugin: PluginType {
@@ -113,6 +115,42 @@ public final class LoaService: LoaAPIServiceProtocol {
                 case .success(let response):
                     do {
                         let dto = try JSONDecoder().decode([CombatSkillDTO].self, from: response.data)
+                        continuation.resume(returning: dto)
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+    
+    public func getNotices() async throws -> [NoticeDTO] {
+        return try await withCheckedThrowingContinuation { continuation in
+            provider.request(.notices) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let dto = try JSONDecoder().decode([NoticeDTO].self, from: response.data)
+                        continuation.resume(returning: dto)
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+    
+    public func getEvents() async throws -> [EventDTO] {
+        return try await withCheckedThrowingContinuation { continuation in
+            provider.request(.notices) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let dto = try JSONDecoder().decode([EventDTO].self, from: response.data)
                         continuation.resume(returning: dto)
                     } catch {
                         continuation.resume(throwing: error)
